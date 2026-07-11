@@ -73,6 +73,11 @@ afterEach(async () => { await db.afterEach(); await pg.afterEach(); });
 Under the hood, `pglite-test` composes the same seams the rest of the stack uses:
 `@pgpmjs/pglite-adapter`'s `registerPglite()` points `pg-cache` at PGlite (so `seed.pgpm()` deploys into it), and `pgsql-client`'s client-factory seam routes the test client at the same in-process session. Because PGlite is a single session, transaction control is ref-counted so the standard two-client `beforeEach`/`afterEach` harness works unchanged.
 
+> **Building a boilerplate from this repo?** See
+> [`docs/pglite-vs-pgsql-test.md`](docs/pglite-vs-pgsql-test.md) — a full catalog of
+> every deviation from a standard `pgsql-test` project (deps, `--experimental-vm-modules`,
+> WASM cold-start timeouts, role creation, extension provisioning, services-free CI).
+
 ### Notes specific to PGlite
 
 - **In-memory by default.** Persist with `getConnections({ pglite: { dataDir: './.pglite' } })`.
