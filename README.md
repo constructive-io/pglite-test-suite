@@ -1,7 +1,7 @@
 # PGlite Test Suite
 
 <p align="center" width="100%">
-  <img height="250" src="https://raw.githubusercontent.com/constructive-io/pglite-test-suite/refs/heads/main/docs/img/logos.svg" />
+  <img height="250" src="docs/img/logos.svg" />
 </p>
 
 <p align="center" width="100%">
