@@ -12,4 +12,7 @@ module.exports = {
   watchPathIgnorePatterns: ['/dist/'],
 
   moduleFileExtensions: ['ts', 'tsx', 'js', 'jsx', 'json', 'node'],
+
+  // PGlite loads a WASM module; the first getConnections() can be slow on a cold CI runner.
+  testTimeout: 120000,
 };

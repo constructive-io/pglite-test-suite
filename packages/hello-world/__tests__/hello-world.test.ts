@@ -18,7 +18,7 @@ beforeAll(async () => {
     { pglite: { extensionSql: ['CREATE ROLE authenticated;'] } },
     [seed.pgpm(__dirname + '/..')]
   ));
-});
+}, 120000);
 
 afterAll(async () => {
   await teardown();

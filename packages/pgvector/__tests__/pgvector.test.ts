@@ -18,7 +18,7 @@ beforeAll(async () => {
     },
     [seed.pgpm(__dirname + '/..')]
   ));
-});
+}, 120000);
 
 afterAll(async () => {
   await teardown();
