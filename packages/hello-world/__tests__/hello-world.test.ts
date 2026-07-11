@@ -9,16 +9,12 @@ const USER_2 = '550e8400-e29b-41d4-a716-446655440002';
 
 beforeAll(async () => {
   // No Postgres server, no `createdb`, no Docker: getConnections() spins up an
-  // in-process PGlite instance and deploys the pgpm module in this package.
-  //
-  // PGlite boots as a single superuser, so any role used via setContext must be
-  // created first. (A future default-role bootstrap in pglite-test will remove
-  // this line; for now we create it explicitly, mirroring a server's role setup.)
-  ({ pg, db, teardown } = await getConnections(
-    { pglite: { extensionSql: ['CREATE ROLE authenticated;'] } },
-    [seed.pgpm(__dirname + '/..')]
-  ));
-}, 120000);
+  // in-process PGlite instance, deploys the pgpm module in this package, and
+  // seeds the standard app roles — so setContext({ role: 'authenticated' })
+  // works with no manual CREATE ROLE. (The cold-start timeout lives once in
+  // jest.config.js, not inline here.)
+  ({ pg, db, teardown } = await getConnections({}, [seed.pgpm(__dirname + '/..')]));
+});
 
 afterAll(async () => {
   await teardown();

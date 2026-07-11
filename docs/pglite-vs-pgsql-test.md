@@ -41,57 +41,58 @@ enabled. Set it in every package's scripts:
 }
 ```
 
-## 3. Generous timeouts for WASM cold-start (required on CI)
+## 3. Generous timeout for WASM cold-start (required on CI)
 
 The first `getConnections()` compiles/loads the PGlite WASM module. On a cold CI
 runner this can exceed **Jest's default 5s hook timeout**, which makes
 `beforeAll` fail and `teardown` come back `undefined` (the failure we hit — the
-deploy logs actually land *after* the timeout). Two guards, applied everywhere:
-
-```ts
-beforeAll(async () => {
-  ({ pg, db, teardown } = await getConnections(/* ... */));
-}, 120000);            // explicit hook timeout
-```
+deploy logs actually land *after* the timeout). Fix it in **one place** —
+`jest.config.js` — not with per-test inline timeouts:
 
 ```js
 // jest.config.js
 module.exports = {
   // ...
-  testTimeout: 120000, // WASM cold-start room
+  testTimeout: 120000, // WASM cold-start room (covers slow extension loads)
 };
 ```
 
 Loading a WASM **extension** (e.g. pgvector) is meaningfully slower than the
-bare instance, so vector suites especially need this. **This should be a default
-in any pglite-test boilerplate.**
+bare instance, so vector suites especially need this. The pglite boilerplate
+ships this in its generated `jest.config.js`, so test files carry no inline
+`beforeAll(..., 120000)` timeouts.
 
-## 4. Roles are not auto-created (required, today)
+## 4. Roles are seeded by default (with an escape hatch)
 
 On a real server `pgsql-test` bootstraps app roles (`anonymous` /
-`authenticated` / `administrator`) via `DbAdmin.createUserRole()` as part of
-`createdb`. PGlite has no `createdb` — the instance *is* the database — so that
-bootstrap never runs and **PGlite boots as a single superuser with no app
-roles**.
-
-Any role used via `setContext({ role })` (and note `db`'s default context role
-is `anonymous`) must be created first, through `extensionSql`:
+`authenticated` / `administrator`) via
+`DbAdmin.createUserRole()` as part of `createdb`. PGlite has no `createdb` — the
+instance *is* the database — so `pglite-test` runs the equivalent bootstrap for
+you before seeding, using the same role generators (`generateCreateBaseRolesSQL`
+/ `generateCreateClientRoleSQL`) and the same attributes (`NOLOGIN`,
+`administrator` gets `BYPASSRLS`). So a bare `getConnections()` can switch into
+an app role with no manual `CREATE ROLE`:
 
 ```ts
-await getConnections(
-  { pglite: { extensionSql: ['CREATE ROLE authenticated;'] } },
-  [seed.pgpm(__dirname + '/..')]
-);
+await getConnections({}, [seed.pgpm(__dirname + '/..')]);
+// db.setContext({ role: 'authenticated', ... }) just works
 ```
 
-The same `CREATE ROLE ... NOLOGIN` / `GRANT` statements our server bootstrap
-uses work verbatim in PGlite (it's real Postgres) — only the `LOGIN PASSWORD`
-second-connection bits are superfluous in-process.
+Custom role *names* come from `db.roles` (a `RoleMapping`), exactly like
+`pgsql-test`.
 
-> **Boilerplate opportunity:** a default-role bootstrap in `pglite-test` (create
-> the group roles from `DEFAULT_ROLE_MAPPING`, `NOLOGIN`, idempotent) would make
-> it a true drop-in and remove this line. Until shipped, the boilerplate creates
-> the roles it uses explicitly.
+**Escape hatch:** to boot a lone superuser and manage your own roles/users, pass
+`pglite: { roles: false }` and create them in `extensionSql` (real Postgres DDL,
+verbatim from what you'd run on a server):
+
+```ts
+await getConnections({
+  pglite: {
+    roles: false,
+    extensionSql: ['CREATE ROLE app_writer NOLOGIN;', 'CREATE ROLE app_user LOGIN;']
+  }
+});
+```
 
 ## 5. Extensions are provisioned out-of-band (required for extensions)
 
@@ -99,10 +100,14 @@ pgpm's `cleanSql` strips `CREATE EXTENSION` from migrations, and PGlite
 extensions are WASM modules that must be registered at construction. So an
 extension like pgvector needs three things wired together:
 
-1. the module's migration keeps its `CREATE EXTENSION vector;` (deploy SQL) and
-   the `.control` file lists it in `requires`;
+1. the `.control` file lists it in `requires` (how pgpm tracks the dependency);
 2. the WASM module is registered at construction: `pglite: { extensions: { vector } }`;
 3. it's installed at bootstrap: `pglite: { extensionSql: ['CREATE EXTENSION IF NOT EXISTS vector;'] }`.
+
+Because `seed.pgpm()` deploys the module's **entire** plan on every suite, any
+suite that seeds a module containing a vector column must register the extension
+— even a suite that only tests RLS. Put steps 2–3 in one shared `connect()`
+helper the suites import, rather than repeating them per file.
 
 ```ts
 import { vector } from '@electric-sql/pglite-pgvector';
@@ -154,7 +159,7 @@ steps:
   - uses: pnpm/action-setup@v4
     with: { version: 10 }
   - uses: actions/setup-node@v4
-    with: { node-version: '20', cache: 'pnpm' }
+    with: { node-version: '22', cache: 'pnpm' }
   - run: pnpm install --frozen-lockfile
   - run: cd ./packages/${{ matrix.package }} && pnpm test
 ```
@@ -166,7 +171,8 @@ role bootstrap. This is the main reason a PGlite boilerplate is attractive.
 
 The server/supabase suite maps roles in `pgpm.json` (`db.roles`, `useLocksForRoles`).
 The PGlite suite's `pgpm.json` is just the workspace manifest (`{"packages": ["packages/*"]}`);
-roles are handled per-suite via `extensionSql` (see §4).
+the standard roles are seeded automatically (see §4), and custom role *names*
+can still be passed per-suite via `db.roles`.
 
 ---
 
@@ -185,8 +191,8 @@ roles are handled per-suite via `extensionSql` (see §4).
 
 - [ ] deps: `pglite-test`, `@pgpmjs/pglite-adapter`, `@electric-sql/pglite` (+ `@electric-sql/pglite-pgvector` for a vector variant)
 - [ ] `test` scripts prefixed with `NODE_OPTIONS=--experimental-vm-modules`
-- [ ] `beforeAll(..., 120000)` + `testTimeout: 120000`
-- [ ] roles created via `pglite.extensionSql` (until default-role bootstrap ships)
-- [ ] extensions: `pglite.extensions` + `CREATE EXTENSION` in `extensionSql`, kept in migration + `.control`
+- [ ] single `testTimeout: 120000` in `jest.config.js` (no inline `beforeAll` timeouts)
+- [ ] standard app roles seeded by default (opt out with `pglite: { roles: false }`)
+- [ ] extensions: `pglite.extensions` + `CREATE EXTENSION` in `extensionSql`, declared in `.control`, shared via one `connect()` helper
 - [ ] services-free CI workflow
 - [ ] minimal `pgpm.json` (no `db.roles`)

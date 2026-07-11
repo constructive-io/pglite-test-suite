@@ -57,10 +57,10 @@ import { getConnections, PgTestClient, seed } from 'pglite-test';
 let pg: PgTestClient, db: PgTestClient, teardown: () => Promise<void>;
 
 beforeAll(async () => {
+  // Standard app roles (authenticated, anonymous, …) are seeded for you, so
+  // setContext({ role: 'authenticated' }) works with no manual CREATE ROLE.
   ({ pg, db, teardown } = await getConnections(
-    // PGlite boots as a single superuser, so roles used via setContext must be
-    // created first (a future default-role bootstrap will remove this):
-    { pglite: { extensionSql: ['CREATE ROLE authenticated;'] } },
+    {},
     [seed.pgpm(__dirname + '/..')] // deploy this package's pgpm module in-process
   ));
 });
