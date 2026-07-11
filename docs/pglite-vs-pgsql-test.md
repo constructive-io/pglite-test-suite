@@ -65,7 +65,7 @@ ships this in its generated `jest.config.js`, so test files carry no inline
 ## 4. Roles are seeded by default (with an escape hatch)
 
 On a real server `pgsql-test` bootstraps app roles (`anonymous` /
-`authenticated` / `administrator` / `authenticated_client`) via
+`authenticated` / `administrator`) via
 `DbAdmin.createUserRole()` as part of `createdb`. PGlite has no `createdb` — the
 instance *is* the database — so `pglite-test` runs the equivalent bootstrap for
 you before seeding, using the same role generators (`generateCreateBaseRolesSQL`
