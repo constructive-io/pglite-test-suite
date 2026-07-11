@@ -48,8 +48,8 @@ importers:
         specifier: ^8.2.3
         version: 8.2.4(@types/node@22.20.1)(encoding@0.1.13)
       pglite-test:
-        specifier: ^0.1.1
-        version: 0.1.1(@electric-sql/pglite@0.5.4)
+        specifier: ^0.2.1
+        version: 0.2.1(@electric-sql/pglite@0.5.4)
       prettier:
         specifier: ^3.7.4
         version: 3.9.5
@@ -619,25 +619,36 @@ packages:
   '@octokit/types@13.10.0':
     resolution: {integrity: sha512-ifLaO34EbbPj0Xgro4G5lP5asESjwHracYJvVaPIyXMuiuXLlhic3S47cBdTb+jfODkTE5YtGCLt3Ay3+J97sA==}
 
-  '@pgpmjs/core@6.27.2':
-    resolution: {integrity: sha512-fPeZs88pv4BCoWaRUTT8cdA8G5icZAvbvq5ic7iMW2yKX1zSWdp22VGXbTDvYIJH9/nD4i8iltEls+2HtG2Cbw==}
+  '@pgpmjs/core@6.28.1':
+    resolution: {integrity: sha512-0h5xlSooScraUQfYhN3ZNcNTw8Rjg75ddNxW+a9jNcioutUh0jN6XzOvi+/UYqcCtQhtJ9wqUR8gwIukRU7hdg==}
 
-  '@pgpmjs/env@2.26.2':
-    resolution: {integrity: sha512-EokImj5672ENMlACLbchiYxN4y3sWCoHT9q+0bGRIm5qCTx3xgv8QHH0o4d3pa1sWGFs0+FCHt7P7Hc3T0AVbw==}
+  '@pgpmjs/env@2.26.4':
+    resolution: {integrity: sha512-KDccvTkA7ed8MTg84gXZ61+dCYnaUwIQTMZ+kJgKUvibyqXH/zIbI32yl5gngDNb/NOs0MHePu5COCU8CXmOFQ==}
 
   '@pgpmjs/logger@2.13.0':
     resolution: {integrity: sha512-lpuq7Xgj5YGDxkY0Dnuqv4wFIcjzFh1xFsj1MaKT7b0J70jjyAOl3ZFXwj2QxsM4wcK4Wp8RUXWjEsjGUESgXQ==}
+
+  '@pgpmjs/logger@2.13.1':
+    resolution: {integrity: sha512-QynwZDuSEqv1IAffKXx6tL+6lMoGejSNHYo3TlFrfLfz7iGjbcHXNULDrMD+1RpabtivaTpb2z316Kkc4lAW/w==}
 
   '@pgpmjs/pglite-adapter@0.1.1':
     resolution: {integrity: sha512-fqPM8vXAwST1hk/QAU+Ad7Sns0mISxNwnAgW1k6oetKD6uQHs3n/P0HsLp2BW5msIQRuBQRC10vHLL4Cak42pg==}
     peerDependencies:
       '@electric-sql/pglite': '>=0.5.0'
 
-  '@pgpmjs/server-utils@3.14.2':
-    resolution: {integrity: sha512-gT/fLs+0cTvBIs1uOpa9o4zywNr3IygdzHy40jIY16VU7vocsFm46SXVfCJSiAevNbG6nvq3rTuQYKgvSfuAUw==}
+  '@pgpmjs/pglite-adapter@0.1.3':
+    resolution: {integrity: sha512-4kyHpyGRns/IRWg3NO/4iHpUTgi79vI05ihBWDjACg7koiORmZHGv/ps36sRTtkvSBSq1iknhyl1JzAHIjWTDA==}
+    peerDependencies:
+      '@electric-sql/pglite': '>=0.5.0'
+
+  '@pgpmjs/server-utils@3.14.4':
+    resolution: {integrity: sha512-XVH5BFlSWFncxeqs9GzNuAoQVM14NCKGjVVydue3DOlJDpp2NLaZN7D8Ssyjc/Kb4yiPH60ZPFbO7VkY9cT2BQ==}
 
   '@pgpmjs/types@2.32.0':
     resolution: {integrity: sha512-zWkTtG01L7KLUyKzcoA3SZXMtp496ZjN2MMksH8/Vfu1v2q/Wg4HMQVAHaafg0P9PIgwWaL3g+Fi3evq8rOnYA==}
+
+  '@pgpmjs/types@2.33.1':
+    resolution: {integrity: sha512-iePk8Ihce/I3FL1NGyHYekD3Wk4RoJO6tkwa/3D4TLiXWi1MUFM/KaAilKnLxYf3QuAkiEmkV9nOiZER4//xfw==}
 
   '@pgsql/quotes@17.1.0':
     resolution: {integrity: sha512-J/H+LcrENBpYgL45WW6aTjb5Yk4tX4+AmB2/k8KZa+Zh3wiCtqmNIag+HZz5HmWaF6EZK9ZGC95NBD1fs+rUvg==}
@@ -1283,8 +1294,8 @@ packages:
     engines: {node: '>= 10'}
     hasBin: true
 
-  csv-to-pg@3.20.1:
-    resolution: {integrity: sha512-ieEOMHzTTsS1GXNWpg/sHyRnkTCsGBGHauzMhWs5B6qjqlUKKX2Uv2w0j3drKPSF2jWDYd/eblOuXghbE59qww==}
+  csv-to-pg@3.20.2:
+    resolution: {integrity: sha512-ZHU30P+Reoq9YI6aEFmr59lfBO0HF8wYRBKGQAOSf+tCxliGdRZNG3GXXeTa0vLgWuEnb+yK+2lprSOwbO6wkA==}
     hasBin: true
 
   dargs@7.0.0:
@@ -2795,6 +2806,9 @@ packages:
   pg-cache@3.14.1:
     resolution: {integrity: sha512-mJ5s6pWigUpCR6lj4M6EbTEsL57/Ccr8Z3IK5LlOinb1+X+S6huNtftmvibhWuwQyBXHz5bZwUYy0WD7Dt5UhA==}
 
+  pg-cache@3.14.3:
+    resolution: {integrity: sha512-43a+zbW5gIFkGqfqvIPCPNViZfqWRdYUFXtQT4xtCCGNLLQsmoMb4+p37THprrIEhJ2/gpOCAY8imJ5avL7l/Q==}
+
   pg-cloudflare@1.4.0:
     resolution: {integrity: sha512-Vo7z/6rrQYxpNRylp4Tlob2elzbh+N/MOQbxFVWCxS7oEx6jF53GTJFxK2WWpKuBRkmiin4Mt+xofFDjx09R0A==}
 
@@ -2806,6 +2820,9 @@ packages:
 
   pg-env@1.17.0:
     resolution: {integrity: sha512-KtOt27+k+gUC2fwhIcaRattAY2r61MHkLlCMBEbSp7VK6XMvYDwHVeg7rsAd4cRWYGnOOEy6C4Mx/eV3T3k2rQ==}
+
+  pg-env@1.17.1:
+    resolution: {integrity: sha512-AW5UAXuRpcX9h8VI6U+tC2hxGir/bfvGczGPE+jKIJZWKp2hbI8XCEqznU5M71ZLiFQscEIVQoT1cQoefWFZHw==}
 
   pg-int8@1.0.1:
     resolution: {integrity: sha512-WCtabS6t3c8SkpDBUlb1kjOs7l66xsGdKpIPZsg4wR+B3+u9UAum2odSsF9tnvxg80h4ZxLWMy4pRjOsFIqQpw==}
@@ -2819,8 +2836,8 @@ packages:
   pg-protocol@1.15.0:
     resolution: {integrity: sha512-cq9sECI5s0+uPUXjbz8ioyPJni6RzsRib0US67i5IoTZKw8fNeYlVE7u8F4dG7vEJJtc5wdD1K189lCCUwqWTQ==}
 
-  pg-seed@0.16.0:
-    resolution: {integrity: sha512-hd4iICFAx/7d1rab9IYib3sry1gvz7wkP6nW0ufUsN2PizUO1KJG+nlKc3wrrhVfB78L0ACc75f0HVBZVHCIkA==}
+  pg-seed@0.16.1:
+    resolution: {integrity: sha512-zbKAS94YDdOH4whd1ppVOhadHn4bXzqQoTjUnA7eQ5sYSa4ZTpp8FvfACjqIk61LZQFbKrEDidPbnpdxqnZL9w==}
 
   pg-types@2.2.0:
     resolution: {integrity: sha512-qTAAlrEsl8s4OiEQY69wDvcMIdQN6wdz5ojQiOy6YRMuynxenON0O5oCpJI6lshc6scgAY8qvJ2On/p+CXY0GA==}
@@ -2835,16 +2852,16 @@ packages:
       pg-native:
         optional: true
 
-  pglite-test@0.1.1:
-    resolution: {integrity: sha512-cvZRpWxnMhC3TK5RNemy8LghzQKamlhpA2bCevtfyJ2raO9gXGJlO2ePoPKtpyk7GL3Ak9lworikXFEzndClgQ==}
+  pglite-test@0.2.1:
+    resolution: {integrity: sha512-ff8m77DR+HGlxWN9UoTGk0Gqy0tSwH/vf3sb+TGAsQsJ0K2URUAAGi1G+xrYvc0UgTSajl7oyI8zrxNWMP59kw==}
     peerDependencies:
       '@electric-sql/pglite': '>=0.5.0'
 
   pgpass@1.0.5:
     resolution: {integrity: sha512-FdW9r/jQZhSeohs1Z3sI1yxFQNFvMcnmfuj4WBMUTxOrAyLMaTcE1aAMBiTlbMNaXvBCQuVi0R7hd8udDSP7ug==}
 
-  pgsql-client@3.20.1:
-    resolution: {integrity: sha512-03qSnh5zHD0Lkk62HX7h5jFqxFSYiZX/FENEotJaDf2fovPA1KwLd7qzErfWFS4IGXEX/lHriRBNMxNc1Z3w+w==}
+  pgsql-client@3.20.3:
+    resolution: {integrity: sha512-OVeJ3lmhscA3Gn9uJsHqrI4larDzNtBNksxCN5fRmdJiQz92JSGnE/bk0e10BYPf0FDIcI28HBvQEV6w7aCA9Q==}
 
   pgsql-deparser@17.18.3:
     resolution: {integrity: sha512-lD8kPWgw9KAbUbKbQKgzDGzVdtEmp25N+7qZl62I7v8Uu9Wqy7+M0EOeU96++OgPD9S1pyp9MKNGzZzPJF2C4Q==}
@@ -2852,11 +2869,11 @@ packages:
   pgsql-parser@17.9.15:
     resolution: {integrity: sha512-6+k0EtTn0CEQTR5v2APARu9En4vm46TpmpdMSfKDHkZwWZuEc08B7SeVg32VxNQ2HD5xk+dQ9TD0k9m+S+vFgg==}
 
-  pgsql-seed@2.18.4:
-    resolution: {integrity: sha512-hki/eBPJ2MDfvDvWoFpNGLNroQWWU993PQlenDRhfsSPFWVd8t3z1W7KqXa68go9BQAXKV5oY4JRvToJqESOuQ==}
+  pgsql-seed@2.18.6:
+    resolution: {integrity: sha512-r9yWTAKDnBZM7lgVfzIfe5AobWONZkdesWjFWvC2/AGy8YriBcAJ8XH9WO+K+CTN/h7+rzNVqG/SxGjYQrg9FA==}
 
-  pgsql-test@4.18.4:
-    resolution: {integrity: sha512-5ol6ctwcxKQ5UotU6jITtlqCGUJPKVbY+LbsOk/FhYtRGHihVUf02/L6166MfS2feu2mSGfXZdVGsLCBDpJfXQ==}
+  pgsql-test@4.18.6:
+    resolution: {integrity: sha512-KPBFyjRLrLqraDSbKAKxvVGRv/QS4HnnEXmRfMZkX2Lbd6YgWWsFv4ODC9VurMPb6YiYOIaAf/elh7+EU4XWbA==}
 
   picocolors@1.1.1:
     resolution: {integrity: sha512-xceH2snhtb5M9liqDsmEw56le376mTZkEX/jEb/RxNFyegNul7eNslCXP9FDj/Lcu0X8KEyMceP2ntpaHrDEVA==}
@@ -4453,20 +4470,20 @@ snapshots:
     dependencies:
       '@octokit/openapi-types': 24.2.0
 
-  '@pgpmjs/core@6.27.2':
+  '@pgpmjs/core@6.28.1':
     dependencies:
-      '@pgpmjs/env': 2.26.2
-      '@pgpmjs/logger': 2.13.0
-      '@pgpmjs/server-utils': 3.14.2
-      '@pgpmjs/types': 2.32.0
-      csv-to-pg: 3.20.1
+      '@pgpmjs/env': 2.26.4
+      '@pgpmjs/logger': 2.13.1
+      '@pgpmjs/server-utils': 3.14.4
+      '@pgpmjs/types': 2.33.1
+      csv-to-pg: 3.20.2
       genomic: 5.6.2
       glob: 13.0.6
       minimatch: 10.2.5
       parse-package-name: 1.0.0
       pg: 8.22.0
-      pg-cache: 3.14.1
-      pg-env: 1.17.0
+      pg-cache: 3.14.3
+      pg-env: 1.17.1
       pgsql-deparser: 17.18.3
       pgsql-parser: 17.9.15
       yanse: 0.2.1
@@ -4474,12 +4491,16 @@ snapshots:
       - pg-native
       - supports-color
 
-  '@pgpmjs/env@2.26.2':
+  '@pgpmjs/env@2.26.4':
     dependencies:
-      '@pgpmjs/types': 2.32.0
+      '@pgpmjs/types': 2.33.1
       deepmerge: 4.3.1
 
   '@pgpmjs/logger@2.13.0':
+    dependencies:
+      yanse: 0.2.1
+
+  '@pgpmjs/logger@2.13.1':
     dependencies:
       yanse: 0.2.1
 
@@ -4490,10 +4511,17 @@ snapshots:
     transitivePeerDependencies:
       - pg-native
 
-  '@pgpmjs/server-utils@3.14.2':
+  '@pgpmjs/pglite-adapter@0.1.3(@electric-sql/pglite@0.5.4)':
     dependencies:
-      '@pgpmjs/logger': 2.13.0
-      '@pgpmjs/types': 2.32.0
+      '@electric-sql/pglite': 0.5.4
+      pg-cache: 3.14.3
+    transitivePeerDependencies:
+      - pg-native
+
+  '@pgpmjs/server-utils@3.14.4':
+    dependencies:
+      '@pgpmjs/logger': 2.13.1
+      '@pgpmjs/types': 2.33.1
       cors: 2.8.6
       express: 5.2.1
       lru-cache: 11.5.2
@@ -4503,6 +4531,10 @@ snapshots:
   '@pgpmjs/types@2.32.0':
     dependencies:
       pg-env: 1.17.0
+
+  '@pgpmjs/types@2.33.1':
+    dependencies:
+      pg-env: 1.17.1
 
   '@pgsql/quotes@17.1.0': {}
 
@@ -5223,7 +5255,7 @@ snapshots:
 
   csv-parser@3.2.1: {}
 
-  csv-to-pg@3.20.1:
+  csv-to-pg@3.20.2:
     dependencies:
       '@pgsql/types': 17.6.2
       '@pgsql/utils': 17.8.17
@@ -7094,6 +7126,16 @@ snapshots:
     transitivePeerDependencies:
       - pg-native
 
+  pg-cache@3.14.3:
+    dependencies:
+      '@pgpmjs/logger': 2.13.1
+      '@pgpmjs/types': 2.33.1
+      lru-cache: 11.5.2
+      pg: 8.22.0
+      pg-env: 1.17.1
+    transitivePeerDependencies:
+      - pg-native
+
   pg-cloudflare@1.4.0:
     optional: true
 
@@ -7103,6 +7145,8 @@ snapshots:
 
   pg-env@1.17.0: {}
 
+  pg-env@1.17.1: {}
+
   pg-int8@1.0.1: {}
 
   pg-pool@3.14.0(pg@8.22.0):
@@ -7111,7 +7155,7 @@ snapshots:
 
   pg-protocol@1.15.0: {}
 
-  pg-seed@0.16.0:
+  pg-seed@0.16.1:
     dependencies:
       csv-parse: 6.2.1
       pg: 8.22.0
@@ -7137,15 +7181,16 @@ snapshots:
     optionalDependencies:
       pg-cloudflare: 1.4.0
 
-  pglite-test@0.1.1(@electric-sql/pglite@0.5.4):
+  pglite-test@0.2.1(@electric-sql/pglite@0.5.4):
     dependencies:
       '@electric-sql/pglite': 0.5.4
-      '@pgpmjs/env': 2.26.2
-      '@pgpmjs/pglite-adapter': 0.1.1(@electric-sql/pglite@0.5.4)
-      pg-cache: 3.14.1
-      pg-env: 1.17.0
-      pgsql-client: 3.20.1
-      pgsql-test: 4.18.4
+      '@pgpmjs/core': 6.28.1
+      '@pgpmjs/env': 2.26.4
+      '@pgpmjs/pglite-adapter': 0.1.3(@electric-sql/pglite@0.5.4)
+      pg-cache: 3.14.3
+      pg-env: 1.17.1
+      pgsql-client: 3.20.3
+      pgsql-test: 4.18.6
     transitivePeerDependencies:
       - pg-native
       - supports-color
@@ -7154,13 +7199,13 @@ snapshots:
     dependencies:
       split2: 4.2.0
 
-  pgsql-client@3.20.1:
+  pgsql-client@3.20.3:
     dependencies:
-      '@pgpmjs/core': 6.27.2
-      '@pgpmjs/logger': 2.13.0
-      '@pgpmjs/types': 2.32.0
+      '@pgpmjs/core': 6.28.1
+      '@pgpmjs/logger': 2.13.1
+      '@pgpmjs/types': 2.33.1
       pg: 8.22.0
-      pg-env: 1.17.0
+      pg-env: 1.17.1
     transitivePeerDependencies:
       - pg-native
       - supports-color
@@ -7176,28 +7221,28 @@ snapshots:
       libpg-query: 17.7.3
       pgsql-deparser: 17.18.3
 
-  pgsql-seed@2.18.4:
+  pgsql-seed@2.18.6:
     dependencies:
-      '@pgpmjs/core': 6.27.2
-      '@pgpmjs/env': 2.26.2
+      '@pgpmjs/core': 6.28.1
+      '@pgpmjs/env': 2.26.4
       pg: 8.22.0
-      pg-env: 1.17.0
-      pg-seed: 0.16.0
+      pg-env: 1.17.1
+      pg-seed: 0.16.1
     transitivePeerDependencies:
       - pg-native
       - supports-color
 
-  pgsql-test@4.18.4:
+  pgsql-test@4.18.6:
     dependencies:
-      '@pgpmjs/env': 2.26.2
-      '@pgpmjs/logger': 2.13.0
-      '@pgpmjs/server-utils': 3.14.2
-      '@pgpmjs/types': 2.32.0
+      '@pgpmjs/env': 2.26.4
+      '@pgpmjs/logger': 2.13.1
+      '@pgpmjs/server-utils': 3.14.4
+      '@pgpmjs/types': 2.33.1
       pg: 8.22.0
-      pg-cache: 3.14.1
-      pg-env: 1.17.0
-      pgsql-client: 3.20.1
-      pgsql-seed: 2.18.4
+      pg-cache: 3.14.3
+      pg-env: 1.17.1
+      pgsql-client: 3.20.3
+      pgsql-seed: 2.18.6
     transitivePeerDependencies:
       - pg-native
       - supports-color
