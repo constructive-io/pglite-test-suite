@@ -1,0 +1,14 @@
+{
+  "name": "@pglite-suite/pgvector-demo",
+  "version": "0.0.1",
+  "author": "Constructive <developers@constructive.io>",
+  "description": "pgvector similarity-search demo, run entirely in-process with PGlite (no server, no native extension build)",
+  "private": true,
+  "scripts": {
+    "clean": "rimraf dist/**",
+    "lint": "eslint . --fix",
+    "test": "NODE_OPTIONS=--experimental-vm-modules jest",
+    "test:watch": "NODE_OPTIONS=--experimental-vm-modules jest --watch"
+  },
+  "keywords": []
+}

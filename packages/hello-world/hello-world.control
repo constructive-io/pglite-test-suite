@@ -1,0 +1,7 @@
+# hello-world extension
+comment = 'RLS demo extension with a self-contained pets table (no server required)'
+default_version = '0.0.1'
+module_pathname = '$libdir/hello-world'
+requires = 'plpgsql'
+relocatable = false
+superuser = false

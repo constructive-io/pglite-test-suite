@@ -1,0 +1,7 @@
+# pgvector-demo extension
+comment = 'pgvector similarity search demo, run entirely in-process with PGlite'
+default_version = '0.0.1'
+module_pathname = '$libdir/pgvector-demo'
+requires = 'plpgsql,vector'
+relocatable = false
+superuser = false

@@ -1,0 +1,14 @@
+{
+  "name": "@pglite-suite/hello-world",
+  "version": "0.0.1",
+  "author": "Constructive <developers@constructive.io>",
+  "description": "Hello World extension with a self-contained Row Level Security (RLS) demo, tested in-process with PGlite",
+  "private": true,
+  "scripts": {
+    "clean": "rimraf dist/**",
+    "lint": "eslint . --fix",
+    "test": "NODE_OPTIONS=--experimental-vm-modules jest",
+    "test:watch": "NODE_OPTIONS=--experimental-vm-modules jest --watch"
+  },
+  "keywords": []
+}
