@@ -1,4 +1,4 @@
-import { getConnections, PgTestClient, seed } from 'pglite-test';
+import { getConnections, PgTestClient } from 'pglite-test';
 
 let pg: PgTestClient;
 let db: PgTestClient;
@@ -13,7 +13,7 @@ beforeAll(async () => {
   // seeds the standard app roles — so setContext({ role: 'authenticated' })
   // works with no manual CREATE ROLE. (The cold-start timeout lives once in
   // jest.config.js, not inline here.)
-  ({ pg, db, teardown } = await getConnections({}, [seed.pgpm(__dirname + '/..')]));
+  ({ pg, db, teardown } = await getConnections());
 });
 
 afterAll(async () => {

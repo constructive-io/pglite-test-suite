@@ -52,17 +52,15 @@ It was scaffolded the same way as a normal pgpm project (`pgpm init workspace` +
 `getConnections()` from `pglite-test` is a drop-in for `pgsql-test`:
 
 ```ts
-import { getConnections, PgTestClient, seed } from 'pglite-test';
+import { getConnections, PgTestClient } from 'pglite-test';
 
 let pg: PgTestClient, db: PgTestClient, teardown: () => Promise<void>;
 
 beforeAll(async () => {
-  // Standard app roles (authenticated, anonymous, …) are seeded for you, so
-  // setContext({ role: 'authenticated' }) works with no manual CREATE ROLE.
-  ({ pg, db, teardown } = await getConnections(
-    {},
-    [seed.pgpm(__dirname + '/..')] // deploy this package's pgpm module in-process
-  ));
+  // Deploys the pgpm module this test belongs to (pgpm finds it from the
+  // package root — no paths to pass) and seeds the standard app roles
+  // (authenticated, anonymous, …), so setContext({ role }) just works.
+  ({ pg, db, teardown } = await getConnections());
 });
 
 afterAll(() => teardown());
