@@ -1,5 +1,5 @@
 import { vector } from '@electric-sql/pglite-pgvector';
-import { getConnections, PgTestClient, seed } from 'pglite-test';
+import { getConnections, PgTestClient } from 'pglite-test';
 
 let pg: PgTestClient;
 let db: PgTestClient;
@@ -9,15 +9,12 @@ beforeAll(async () => {
   // pgvector is a WASM extension in PGlite: register the module at construction
   // (`extensions: { vector }`) and let the module's `CREATE EXTENSION vector`
   // provision it out-of-band. No native build, no server.
-  ({ pg, db, teardown } = await getConnections(
-    {
-      pglite: {
-        extensions: { vector },
-        extensionSql: ['CREATE EXTENSION IF NOT EXISTS vector;'],
-      },
+  ({ pg, db, teardown } = await getConnections({
+    pglite: {
+      extensions: { vector },
+      extensionSql: ['CREATE EXTENSION IF NOT EXISTS vector;'],
     },
-    [seed.pgpm(__dirname + '/..')]
-  ));
+  }));
 });
 
 afterAll(async () => {

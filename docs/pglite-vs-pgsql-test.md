@@ -74,7 +74,7 @@ you before seeding, using the same role generators (`generateCreateBaseRolesSQL`
 an app role with no manual `CREATE ROLE`:
 
 ```ts
-await getConnections({}, [seed.pgpm(__dirname + '/..')]);
+await getConnections();
 // db.setContext({ role: 'authenticated', ... }) just works
 ```
 
@@ -112,15 +112,12 @@ helper the suites import, rather than repeating them per file.
 ```ts
 import { vector } from '@electric-sql/pglite-pgvector';
 
-await getConnections(
-  {
-    pglite: {
-      extensions: { vector },
-      extensionSql: ['CREATE EXTENSION IF NOT EXISTS vector;'],
-    },
+await getConnections({
+  pglite: {
+    extensions: { vector },
+    extensionSql: ['CREATE EXTENSION IF NOT EXISTS vector;'],
   },
-  [seed.pgpm(__dirname + '/..')]
-);
+});
 ```
 
 On a real server the same `CREATE EXTENSION vector` just installs the native
