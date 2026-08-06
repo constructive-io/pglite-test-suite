@@ -1,2 +1,44 @@
 packages:
   - 'packages/*'
+
+# Exempt from the wait: 6 scope glob(s), 19 first-party package(s).
+# First-party membership comes from what pyramation publishes on npm — waiting on your own release protects nothing.
+minimumReleaseAgeExclude:
+  - "@constructive-db/*"
+  - "@constructive-io/*"
+  - "@launchql/*"
+  - "@pgpm/*"
+  - "@pgpmjs/*"
+  - "@pgsql/*"
+  - appstash
+  - csv-to-pg
+  - find-and-require-package-json
+  - genomic
+  - inquirerer
+  - libpg-query
+  - nested-obj
+  - pg-cache
+  - pg-env
+  - pg-seed
+  - pglite-test
+  - pgsql-client
+  - pgsql-deparser
+  - pgsql-parser
+  - pgsql-seed
+  - pgsql-test
+  - pnpm-policy
+  - yamlize
+  - yanse
+
+# Managed by pnpm-policy — run `pnpm-policy generate` after editing pnpm-policy.yaml.
+
+# A third-party release must be 2d old before it can be installed.
+# Most malicious releases are found and yanked well inside that window.
+minimumReleaseAge: 2880
+
+# The only dependencies permitted to run install scripts.
+onlyBuiltDependencies:
+  - nx # Transitive dependency of lerna; its postinstall script downloads the platform-specific native binary nx's CLI requires to run.
+
+# Transitive dependencies must come from the registry, not from git or a URL.
+blockExoticSubdeps: true

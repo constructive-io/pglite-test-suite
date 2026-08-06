@@ -35,5 +35,8 @@ jobs:
       - name: Install
         run: pnpm install --frozen-lockfile
 
+      - name: Check supply-chain policy
+        run: pnpm run policy:check
+
       - name: Test ${{ matrix.package }}
         run: cd ./packages/${{ matrix.package }} && pnpm test
